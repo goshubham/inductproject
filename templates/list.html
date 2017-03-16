@@ -18,7 +18,9 @@
                 <tbody>
                     {% for i in instancelist %}
                      <tr>
-                         <td style="text-align: center">{{ i.number }}</td>
+                         <form action="get">
+                         <td style="text-align: center"><a href="{% url 'incident_details' i.sys_id %}">{{ i.number }}</a></td>
+                         </form>
                          <td style="text-align: center">{{ i.sys_id }}</td>
                          <td style="text-align: center">{{ i.short_description }}</td>
                          <td style="text-align: center">{{ i.active }}</td>

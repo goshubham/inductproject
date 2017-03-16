@@ -1,0 +1,21 @@
+{% extends 'base.html' %}
+
+{% block content %}
+
+<div class="container">
+    <div class="row">
+        <div class="jumbotron">
+            <h3>Incident Details</h3>
+            <ul style="list-style-type:circle">
+                <li>Name- {{ instancedetaildict.number }}</li><br>
+                <li>Description- {{ instancedetaildict.description }}</li><br>
+                <li>Category- {{ instancedetaildict.category }}</li>
+                <li>Priority- {{ instancedetaildict.priority }}</li>
+                <li>Open- {{ instancedetaildict.opened_at }}</li>
+                <li>Close- {{ instancedetaildict.closed_at }}</li>
+                <li>Close Notes- {{ instancedetaildict.close_notes }}</li>
+            </ul>
+        </div>
+    </div>
+</div>
+{% endblock %}
