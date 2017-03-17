@@ -1,0 +1,24 @@
+{% extends 'base.html' %}
+
+{% block content %}
+
+<div class="container">
+    <div class="row">
+        <div class="jumbotron">
+            <h1>Update the Incident-</h1>
+            <form method="post" action="{% url 'getUpdateDetail' %}">
+                {% csrf_token %}
+                <p align="left">
+                Name:<br>
+                <input type="text" name="nameinci" placeholder="Name Incident" align="left" id="namei" size="40" value={{ name }}><br />
+                    ID:<br>
+                <input type="text" name="idinci" placeholder="ID Incident" align="left" id="idi" size="40" readonly value={{ sys_id }}><br />
+                Description:<br />
+                <input type="text" name="descriptioninci" placeholder="Describe Incident" align="center" id="desci" size="40" style="height: 200px;" required><br><br>
+                <input type="submit" value="Update">
+                </p>
+            </form>
+        </div>
+    </div>
+</div>
+{% endblock %}

@@ -2,119 +2,95 @@ from django.shortcuts import render
 from django.contrib.auth.decorators import login_required
 import json
 import requests
+from .services import ConnDet
+from .services import *
+
 
 # Create your views here.
 @login_required(login_url="login/")
 def logi(request):
-    return render(request,"home.html")
+    try:
+        return render(request, "home.html")
+    except Exception:
+        return render(request , "error.html")
+
 
 ########################################################################################################################
-# Connection details
-class ConnDet:
-    url = 'https://dev20632.service-now.com/api/now/table/incident'
-    user = 'admin'
-    pwd = 'Qazwsx@123'
 
-# Get Connection
-def getConnectSnList():
-    # Set the request parameters
-    url = 'https://dev20632.service-now.com/api/now/table/incident'
-    user = 'admin'
-    pwd = 'Qazwsx@123'
-
-    # Set proper headers
-    headers = {"Accept": "application/json"}
-
-    # Do the HTTP request
-    response = requests.get(url, auth=(user, pwd), headers=headers)
-
-    # Check for HTTP codes other than 200
-    if response.status_code != 200:
-        print('Status:', response.status_code, 'Headers:', response.headers, 'Error Response:', response.json())
-        exit()
-
-    # Decode the JSON response into a dictionary and use the data
-    if response.status_code == 200:
-        print('Status:', response.status_code)
-
-    # print(str(response.json()))
-    resData = json.dumps(response.json())
-    resDataJson = json.loads(resData) # result in string error solved
-
-    parseRes = resDataJson['result']
-    #print('**************')
-    #print(parseRes)
-    #print(resDataJson)
-    return parseRes
-
-    # print('Status:', response.status_code, 'Headers:', response.headers, 'Response:', response.json())
+# print('Status:', response.status_code, 'Headers:', response.headers, 'Response:', response.json())
 
 
 @login_required(login_url="login/")
 def listall(request):
-    dictOfList = getConnectSnList()
-    return render(request, "list.html", { 'instancelist': dictOfList })
+    try:
+        dictOfList = getConnectSnList()
+        return render(request, "list.html", {'instancelist': dictOfList})
+    except Exception as e:
+        print("donnn")
+        return render(request, "error.html")
+
 
 #######################################################################################################################
-def getConnectDetail(sys_id):
-    url = ConnDet.url + '/' + sys_id
-    user = ConnDet.user
-    pwd = ConnDet.pwd
 
-    # Set proper headers
-    headers = {"Accept": "application/json"}
-
-    # Do the HTTP request
-    response = requests.get(url, auth=(user, pwd), headers=headers)
-
-    # Check for HTTP codes other than 200
-    if response.status_code != 200:
-        print('Status:', response.status_code, 'Headers:', response.headers, 'Error Response:', response.json())
-        exit()
-
-    # Decode the JSON response into a dictionary and use the data
-    if response.status_code == 200:
-        print('Status:', response.status_code)
-        #print('*************')
-
-    resData = json.dumps(response.json())
-    resDataJson = json.loads(resData)
-
-    parseRes = resDataJson['result']
-    print('#################')
-    #print(resDataJson)
-    return parseRes
 
 @login_required(login_url="login/")
-def incidentdet(request,sys_id):
+def incidentdet(request, sys_id):
     dictOfDetails = getConnectDetail(sys_id)
-    return render(request, 'incidet.html',{ 'instancedetaildict': dictOfDetails })
+    return render(request, 'incidet.html', {'instancedetaildict': dictOfDetails})
+
 
 ######################################################################################################################
-def createincident(name,desc):
-    url = ConnDet.url
-    user = ConnDet.user
-    pwd = ConnDet.pwd
-
-    # Set proper headers
-    headers = {"Accept": "application/json","Content-Type":"application/json"}
-    postBody = "{'short_description':'"+desc+"','number':'"+name+"'}"
-
-    response = requests.post(url, auth=(user, pwd), headers=headers, data= postBody)
-    print('@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@')
-    print(response.status_code)
-
-
 @login_required(login_url="login/")
 def createinc(request):
     return render(request, 'createinc.html')
 
+
+@login_required(login_url="login/")
 def createdinc(request):
     name = request.POST['nameinci']
-    print("%%%%%%%%%%%%%%%%%%%%%%%%%")
-    print(name)
     describe = request.POST['descriptioninci']
+    butt = request.POST['buttcreate']
+    print(butt)
     print(describe)
 
-    createincident(name,describe)
+    createincident(name, describe)
     return render(request, 'creation.html')
+
+
+######################################################################################################################
+@login_required(login_url="login/")
+def updateinc(request):
+    dictOfList = getConnectSnList()
+    return render(request, "update.html", {'instancelist': dictOfList})
+
+
+@login_required(login_url="login/")
+def getUpdateDetail(request):
+    name = request.POST['nameinci']
+    idofinci = request.POST['idinci']
+    describe = request.POST['descriptioninci']
+
+    finalupdate(idofinci, describe, name)
+    dictOfList = getConnectSnList()
+    return render(request, 'list.html', {'instancelist': dictOfList})
+
+
+@login_required(login_url="login/")
+def update_select(request, number):
+    sys_id = request.POST['but']
+    return render(request, 'updateform.html', {'sys_id': sys_id, 'name': number})
+
+
+#######################################################################################################################
+@login_required(login_url="login/")
+def deleteinc(request):
+    dictOfList = getConnectSnList()
+    return render(request, "delete.html", {'instancelist': dictOfList})
+
+
+@login_required(login_url="login/")
+def delete_select(request):
+    sys_id = request.POST['but']
+    finaldelete(sys_id)
+    dictOfList = getConnectSnList()
+    return render(request, "delete.html", {'instancelist': dictOfList})

@@ -1,0 +1,39 @@
+{% extends 'base.html' %}
+
+{% block content %}
+
+<div class="container">
+    <div class="row">
+        <div class="jumbotron">
+            <p>Choose incident to update it...</p>
+            <table style="width:100%">
+                <thead style="background-color: #EBF4FA;  color: black;">
+                <tr>
+                    <th style="text-align: center">Name</th>
+                    <th style="text-align: center">ID</th>
+                    <th style="text-align: center">Description</th>
+                    <th style="text-align: center">Active Status</th>
+                </tr>
+                </thead>
+                <tbody>
+                    {% for i in instancelist %}
+                     <tr>
+                         <form action="get">
+                         <td style="text-align: center"><a href="{% url 'incident_details' i.sys_id %}">{{ i.number }}</a></td>
+                         </form>
+                         <td style="text-align: center">{{ i.sys_id }}</td>
+                         <td style="text-align: center">{{ i.short_description }}</td>
+                         <td style="text-align: center">{{ i.active }}</td>
+                         <form method="post" action="{% url 'update_select' i.number %}">
+                             {% csrf_token %}
+
+                         <td style="text-align: center"><button type="submit" name="but" value={{ i.sys_id }}>Choose</button></td>
+                         </form>
+                     </tr>
+                    {% endfor %}
+                </tbody>
+            </table>
+        </div>
+    </div>
+</div>
+{% endblock %}
