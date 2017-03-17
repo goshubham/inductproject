@@ -8,7 +8,7 @@ import requests
 def logi(request):
     return render(request,"home.html")
 
-##################################################################################################################################################
+########################################################################################################################
 # Connection details
 class ConnDet:
     url = 'https://dev20632.service-now.com/api/now/table/incident'
@@ -89,3 +89,32 @@ def getConnectDetail(sys_id):
 def incidentdet(request,sys_id):
     dictOfDetails = getConnectDetail(sys_id)
     return render(request, 'incidet.html',{ 'instancedetaildict': dictOfDetails })
+
+######################################################################################################################
+def createincident(name,desc):
+    url = ConnDet.url
+    user = ConnDet.user
+    pwd = ConnDet.pwd
+
+    # Set proper headers
+    headers = {"Accept": "application/json","Content-Type":"application/json"}
+    postBody = "{'short_description':'"+desc+"','number':'"+name+"'}"
+
+    response = requests.post(url, auth=(user, pwd), headers=headers, data= postBody)
+    print('@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@')
+    print(response.status_code)
+
+
+@login_required(login_url="login/")
+def createinc(request):
+    return render(request, 'createinc.html')
+
+def createdinc(request):
+    name = request.POST['nameinci']
+    print("%%%%%%%%%%%%%%%%%%%%%%%%%")
+    print(name)
+    describe = request.POST['descriptioninci']
+    print(describe)
+
+    createincident(name,describe)
+    return render(request, 'creation.html')

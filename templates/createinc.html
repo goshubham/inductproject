@@ -1,0 +1,22 @@
+{% extends 'base.html' %}
+
+{% block content %}
+
+<div class="container">
+    <div class="row">
+        <div class="jumbotron">
+            <h1>Create New Incident-</h1>
+            <form method="post" action="{% url 'createdinc' %}">
+                {% csrf_token %}
+                <p align="left">
+                Name:<br>
+                <input type="text" name="nameinci" placeholder="Name Incident" align="left" id="namei" required><br />
+                Description:<br />
+                <input type="text" name="descriptioninci" placeholder="Describe Incident" align="center" id="desci" required><br><br>
+                <input type="submit" value="create">
+                </p>
+            </form>
+        </div>
+    </div>
+</div>
+{% endblock %}
