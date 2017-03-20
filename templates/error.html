@@ -44,6 +44,8 @@
 </head>
 <body>
     <h1>Page Not Found</h1>
-    <p>Sorry, but the page you were trying to view does not exist.</p>
+    <p>Something, Went Wrong...</p>{{ error }}
+    <a href="{% url 'home'%}" >Return To Homepage</a>
+
 </body>
 </html>
