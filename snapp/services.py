@@ -44,7 +44,7 @@ def getConnectDetail(sys_id):
 # Get the list of all
 def getConnectSnList():
     # Set the request parameters
-    url = ConnDet.url
+    url = ConnDet.url + '/jkl'
     user = ConnDet.user
     pwd = ConnDet.pwd
 

@@ -8,6 +8,7 @@ from .services import *
 
 # Standard Logger for project
 stdlogg = logging.getLogger(name= 'mylog')
+stdlogg2 = logging.getLogger(name= 'mylogfordebug')
 
 # Create your views here.
 @login_required(login_url="login/")
@@ -27,10 +28,13 @@ def listall(request):
     try:
         #logging.error('hey there') worked
         dictOfList = getConnectSnList()
-        stdlogg.debug(msg= 'Listing all incidents')
+        stdlogg.info(msg= 'Listing all incidents')
+
+        #stdlogg.warning(msg= 'isuue with listing')
         return render(request, "list.html", {'instancelist': dictOfList})
     except Exception as e:
         stdlogg.debug(e.__str__())
+        stdlogg.warning(msg= 'isuue with listing')
         return render(request, "error.html", {'error': 'ConnectionError'})
 
 

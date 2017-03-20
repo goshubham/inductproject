@@ -128,14 +128,6 @@ LOGIN_REDIRECT_URL = '/'
 LOGGING = {
     'version': 1,
     'disable_existing_loggers': True,
-    'filters': {
-        'require_debug_false': {
-            '()': 'django.utils.log.RequireDebugFalse',
-        },
-        'require_debug_true': {
-            '()': 'django.utils.log.RequireDebugTrue',
-        },
-    },
     'formatters': {
         'simple': {
             'format': '[%(asctime)s] %(levelname)s %(message)s',
@@ -149,20 +141,17 @@ LOGGING = {
     'handlers': {
         'console': {
             'level': 'INFO',
-            'filters': ['require_debug_true'],
             'class': 'logging.StreamHandler',
             'formatter': 'simple'
         },
         'development_logfile': {
             'level': 'DEBUG',
-            'filters': ['require_debug_true'],
             'class': 'logging.FileHandler',
             'filename': 'C:/Users/GS-1436/PycharmProjects/inductproject/debug.log',
             'formatter': 'verbose'
         },
         'warn_logfile': {
             'level': 'WARNING',
-            'filters': ['require_debug_true'],
             'class': 'logging.FileHandler',
             'filename': 'C:/Users/GS-1436/PycharmProjects/inductproject/warn.log',
             'formatter': 'verbose'
@@ -170,7 +159,14 @@ LOGGING = {
     },
     'loggers': {
         'mylog': {
-            'handlers': ['console','development_logfile','warn_logfile'],
+            'level': 'INFO',
+            'handlers': ['console','warn_logfile'],
+            'propagate': True
+        },
+        'mylogfordebug': {
+            'level': 'DEBUG',
+            'handlers': ['development_logfile',],
+            'propagate': True
         },
     }
 }
