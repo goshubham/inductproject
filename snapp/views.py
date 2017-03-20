@@ -25,7 +25,7 @@ def logi(request):
 @login_required(login_url="login/")
 def listall(request):
     try:
-        #logging.error('hey there')
+        #logging.error('hey there') worked
         dictOfList = getConnectSnList()
         stdlogg.debug(msg= 'Listing all incidents')
         return render(request, "list.html", {'instancelist': dictOfList})
