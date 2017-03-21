@@ -21,6 +21,8 @@ from snapp.forms import LoginForm
 urlpatterns = [
     url(r'^admin/', admin.site.urls),
     url(r'', include('snapp.urls')),
+    url(r'^home/login/$', views.login, {'template_name':'login.html', 'authentication_form': LoginForm},name= 'login'),
+    url(r'^list/login/$', views.login, {'template_name':'login.html', 'authentication_form': LoginForm},name= 'login'),
     url(r'^login/$', views.login, {'template_name':'login.html', 'authentication_form': LoginForm},name= 'login'),
     url(r'^logout/$', views.logout, {'next_page': '/login'}, name= 'logout'),
 ]

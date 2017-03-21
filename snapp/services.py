@@ -1,9 +1,11 @@
 import requests
 import json
+import logging
 
 
 ########################################################################################################################
 # Connection details
+loghttp = logging.getLogger(name='mylogfordebug')
 class ConnDet:
     url = 'https://dev20632.service-now.com/api/now/table/incident'
     user = 'admin'
@@ -21,22 +23,23 @@ def getConnectDetail(sys_id):
     # Do the HTTP request
     response = requests.get(url, auth=(user, pwd), headers=headers)
     if response.status_code != 200:
+        loghttp.debug('Response other than 200 in getConnectDetail(sysid) '+ str(response.status_code))
         raise requests.ConnectionError
 
     # Check for HTTP codes other than 200
     if response.status_code != 200:
-        print('Status:', response.status_code, 'Headers:', response.headers, 'Error Response:', response.json())
+        #print('Status:', response.status_code, 'Headers:', response.headers, 'Error Response:', response.json())
         exit()
 
     # Decode the JSON response into a dictionary and use the data
     if response.status_code == 200:
-        print('Status:', response.status_code)
+        loghttp.debug('Connection is okk...\n getConnectDetail(sysid)' + str(response.status_code))
 
     resData = json.dumps(response.json())
     resDataJson = json.loads(resData)
 
     parseRes = resDataJson['result']
-    print('#################')
+    loghttp.debug('JSON is returned backed from getConnectDetail(sysid)' + str(response.status_code))
     # print(resDataJson)
     return parseRes
 
@@ -44,7 +47,7 @@ def getConnectDetail(sys_id):
 # Get the list of all
 def getConnectSnList():
     # Set the request parameters
-    url = ConnDet.url + '/jkl'
+    url = ConnDet.url
     user = ConnDet.user
     pwd = ConnDet.pwd
 
@@ -53,21 +56,24 @@ def getConnectSnList():
     # Do the HTTP request
     response = requests.get(url, auth=(user, pwd), headers=headers)
     if response.status_code != 200:
+        loghttp.debug('Response other than 200 in getConnectSnList()' + str(response.status_code))
         raise requests.ConnectionError
 
     if response.status_code != 200:
-        print('Status:', response.status_code, 'Headers:', response.headers, 'Error Response:', response.json())
+        #print('Status:', response.status_code, 'Headers:', response.headers, 'Error Response:', response.json())
         exit()
 
     # Decode the JSON response into a dictionary and use the data
     if response.status_code == 200:
-        print('Status:', response.status_code)
+        loghttp.debug('Connection is okk.... \n getConnectSnList()' + str(response.status_code))
+        #print('Status:', response.status_code)
 
     # print(str(response.json()))
     resData = json.dumps(response.json())
     resDataJson = json.loads(resData)  # result in string error solved
 
     parseRes = resDataJson['result']
+    loghttp.debug('JSON is returned backed from getConnectSnList()' + str(response.status_code))
     # print('**************')
     # print(parseRes)
     # print(resDataJson)
@@ -86,8 +92,10 @@ def createincident(name, desc):
 
     response = requests.post(url, auth=(user, pwd), headers=headers, data=postBody)
     if response.status_code != 201:
+        loghttp.debug('failed to create incident check createincident(name, desc)' + str(response.status_code))
         raise requests.ConnectionError
-    print(response.status_code)
+
+    loghttp.debug('Incident is creating createincident(name, desc)' + str(response.status_code))
 
 
 def finalupdate(idofinci, desc, name):
@@ -101,10 +109,13 @@ def finalupdate(idofinci, desc, name):
 
     response = requests.put(url, auth=(user, pwd), headers=headers, data=postBody)
     if response.status_code != 200:
+        loghttp.debug('Failed to update in finalupdate(idofinci, desc, name)' + str(response.status_code))
         raise requests.ConnectionError
-    print(url)
-    print('@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@')
-    print(response.status_code)
+
+    #print(url)
+    #print('@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@')
+    #print(response.status_code)
+    loghttp.debug('Upadted successfully... finalupdate(idofinci, desc, name)' + str(response.status_code))
 
 
 def finaldelete(idofinci):
@@ -118,7 +129,10 @@ def finaldelete(idofinci):
 
     response = requests.delete(url, auth=(user, pwd), headers=headers)
     if response.status_code != 204:
+        loghttp.debug('Failed to delete in finaldelete(idofinci)' + str(response.status_code))
         raise requests.ConnectionError
-    print(url)
-    print('@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@')
-    print(response.status_code)
+
+    #print(url)
+    #print('@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@')
+    #print(response.status_code)
+    loghttp.debug('Deleted successfully... finalupdate(idofinci)' + str(response.status_code))

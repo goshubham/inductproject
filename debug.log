@@ -1,0 +1,19 @@
+[2017-03-21 12:48:34] DEBUG [mylogfordebug.<module>:12] -------------------------------------------------------------------------------
+[2017-03-21 12:48:52] DEBUG [mylogfordebug.getConnectSnList:68] Connection is okk.... 
+ getConnectSnList()200
+[2017-03-21 12:48:52] DEBUG [mylogfordebug.getConnectSnList:76] JSON is returned backed from getConnectSnList()200
+[2017-03-21 13:02:06] DEBUG [mylogfordebug.<module>:12] -------------------------------------------------------------------------------
+[2017-03-21 13:02:27] DEBUG [mylogfordebug.getConnectSnList:68] Connection is okk.... 
+ getConnectSnList()200
+[2017-03-21 13:02:27] DEBUG [mylogfordebug.getConnectSnList:76] JSON is returned backed from getConnectSnList()200
+[2017-03-21 13:58:17] DEBUG [mylogfordebug.<module>:12] -------------------------------------------------------------------------------
+[2017-03-21 13:58:45] DEBUG [mylogfordebug.getConnectSnList:68] Connection is okk.... 
+ getConnectSnList()200
+[2017-03-21 13:58:45] DEBUG [mylogfordebug.getConnectSnList:76] JSON is returned backed from getConnectSnList()200
+[2017-03-21 14:01:07] DEBUG [mylogfordebug.getConnectSnList:68] Connection is okk.... 
+ getConnectSnList()200
+[2017-03-21 14:01:07] DEBUG [mylogfordebug.getConnectSnList:76] JSON is returned backed from getConnectSnList()200
+[2017-03-21 14:01:55] DEBUG [mylogfordebug.<module>:12] -------------------------------------------------------------------------------
+[2017-03-21 14:02:21] DEBUG [mylogfordebug.getConnectSnList:68] Connection is okk.... 
+ getConnectSnList()200
+[2017-03-21 14:02:21] DEBUG [mylogfordebug.getConnectSnList:76] JSON is returned backed from getConnectSnList()200
