@@ -1,4 +1,4 @@
-{% extends 'base.html' %}
+{% extends 'baseforlogin.html' %}
 
 
 {% block content %}
@@ -27,7 +27,7 @@
                 </div>
                 <div class="panel-body">
                     <form method="post" action="{% url 'login' %}">
-{% csrf_token %}
+                        {% csrf_token %}
 
                         <p class="bs-component">
                             <table>
