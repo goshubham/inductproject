@@ -8,12 +8,13 @@
             <h3>Incident Details</h3>
             <ul style="list-style-type:circle">
                 <li>Name- {{ instancedetaildict.number }}</li><br>
-                <li>Description- {{ instancedetaildict.description }}</li><br>
-                <li>Category- {{ instancedetaildict.category }}</li>
-                <li>Priority- {{ instancedetaildict.priority }}</li>
-                <li>Open- {{ instancedetaildict.opened_at }}</li>
-                <li>Close- {{ instancedetaildict.closed_at }}</li>
-                <li>Close Notes- {{ instancedetaildict.close_notes }}</li>
+                <li>Description- {{ instancedetaildict.short_description }}</li><br>
+                <li>Category- {{ instancedetaildict.category }}</li><br>
+                <li>Priority- {{ instancedetaildict.priority }}</li><br>
+                <li>Open- {{ instancedetaildict.opened_at }}</li><br>
+                <li>Close- {{ instancedetaildict.closed_at }}</li><br>
+                <li>Close Notes- {{ instancedetaildict.close_notes }}</li><br>
+                <li>State- {{ instancedetaildict.state }}</li><br>
             </ul>
         </div>
     </div>

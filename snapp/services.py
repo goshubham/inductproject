@@ -87,14 +87,14 @@ def getConnectSnList():
 
 
 # creating new incident
-def createincident(name, desc):
+def createincident(name, desc, urgency, catag, state):
     url = ConnDet.url
     user = ConnDet.user
     pwd = ConnDet.pwd
 
     # Set proper headers
     headers = {"Accept": "application/json", "Content-Type": "application/json"}
-    postBody = "{'short_description':'" + desc + "','number':'" + name + "'}"
+    postBody = "{'short_description':'" + desc + "','number':'" + name + "','urgency':'"+ urgency +"', 'catagory':'"+ catag +"', 'state':'"+ state +"'}"
 
     response = requests.post(url, auth=(user, pwd), headers=headers, data=postBody)
     if response.status_code != 201:
@@ -104,14 +104,14 @@ def createincident(name, desc):
     loghttp.debug('Incident is creating createincident(name, desc)' + str(response.status_code))
 
 
-def finalupdate(idofinci, desc, name):
+def finalupdate(idofinci, desc, name,urgency,catag,state):
     url = ConnDet.url + '/' + idofinci
     user = ConnDet.user
     pwd = ConnDet.pwd
 
     # Set proper headers
     headers = {"Accept": "application/json", "Content-Type": "application/json"}
-    postBody = "{'short_description':'" + desc + "','number':'" + name + "'}"
+    postBody = "{'short_description':'" + desc + "','number':'" + name + "','urgency':'"+ urgency +"', 'catagory':'"+ catag +"', 'state':'"+ state +"'}"
 
     response = requests.put(url, auth=(user, pwd), headers=headers, data=postBody)
 

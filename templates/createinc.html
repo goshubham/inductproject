@@ -6,13 +6,38 @@
     <div class="row">
         <div class="jumbotron">
             <h1>Create New Incident-</h1>
-            <form method="post" action="{% url 'createdinc' %}">
+            <form method="post" action="{% url 'createdinc' %}" id="createform">
                 {% csrf_token %}
                 <p align="left">
                 Name:<br>
                 <input type="text" name="nameinci" placeholder="Name Incident" align="left" id="namei" required><br />
-                Description:<br />
-                <input type="text" name="descriptioninci" placeholder="Describe Incident" align="center" id="desci" required><br><br>
+                Short Description:<br />
+                <textarea cols="30" rows="3" name="descriptioninci" placeholder="Describe Incident" id="desci" required form="createform"></textarea><br><br>
+                Urgency:
+                <select name="urgencyin">
+                    <option value="1">High</option>
+                    <option value="2">Medium</option>
+                    <option value="3">Low</option>
+                </select><br><br>
+                Category:<br>
+                <input type="radio" name="catainc" value="Request" checked>Request &nbsp; &nbsp; &nbsp;&nbsp;&nbsp;
+                <input type="radio" name="catainc" value="Inquiry / Help">Inquiry / Help &nbsp; &nbsp; &nbsp;
+                <input type="radio" name="catainc" value="Software">Software<br>
+                <input type="radio" name="catainc" value="Hardware">Hardware &nbsp;&nbsp;&nbsp;
+                <input type="radio" name="catainc" value="Network">Network &nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;
+                <input type="radio" name="catainc" value="Database">Database <br><br>
+
+                State:
+                <select name="stateinc">
+                    <option value="New">New</option>
+                    <option value="Active">Active</option>
+                    <option value="Awaiting Problem">Awaiting Problem</option>
+                    <option value="Awaiting User Info">Awaiting User Info</option>
+                    <option value="Awaiting Evidence">Awaiting Evidence</option>
+                    <option value="Resolved">Resolved</option>
+                    <option value="Closed">Closed</option>
+                </select><br><br>
+
                 <input type="submit" name="buttcreate" value="create">
                 </p>
             </form>

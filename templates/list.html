@@ -19,6 +19,7 @@
                     {% for i in instancelist %}
                      <tr>
                          <form action="get">
+                             {% csrf_token %}
                          <td style="text-align: center"><a href="{% url 'incident_details' i.sys_id %}">{{ i.number }}</a></td>
                          </form>
                          <td style="text-align: center">{{ i.sys_id }}</td>

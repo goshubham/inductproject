@@ -73,12 +73,15 @@ def createinc(request):
 def createdinc(request):
     try:
         name = request.POST['nameinci']
-        describe = request.POST['descriptioninci']
+        short_describe = request.POST['descriptioninci']
+        urgency = request.POST['urgencyin']
+        catag = request.POST['catainc']
+        state = request.POST['stateinc']
         butt = request.POST['buttcreate']
         #print(butt)
         #print(describe)
         stdlogg.info(msg='got the info to create incident')
-        createincident(name, describe)
+        createincident(name, short_describe, urgency, catag, state)
         stdlogg.info(msg='Incident creation completed...')
         return render(request, 'creation.html')
 
@@ -106,9 +109,12 @@ def getUpdateDetail(request):
         name = request.POST['nameinci']
         idofinci = request.POST['idinci']
         describe = request.POST['descriptioninci']
+        urgency = request.POST['urgencyin']
+        catag = request.POST['catainc']
+        state = request.POST['stateinc']
 
         stdlogg.info(msg='processing info for updation')
-        finalupdate(idofinci, describe, name)
+        finalupdate(idofinci, describe, name, urgency, catag, state)
         stdlogg.info(msg='updation completed sucessfully')
         dictOfList = getConnectSnList()
         return render(request, 'list.html', {'instancelist': dictOfList})
