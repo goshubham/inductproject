@@ -167,5 +167,13 @@ class SNInstanceConfiguredList(APIView):
         stdlogg2.debug(msg= 'GET request for listing configured SN instances')
         return Response(serial.data)
 
-    def post(self):
-        pass
+    def post(self , request):
+        serial = ConfigSNSerializer(data= request.data)
+        if serial.is_valid():
+            serial.save()
+            stdlogg.info(msg='POST request to store new SN configurations')
+            stdlogg2.debug(msg='POST request to store new SN configurations')
+            return Response(serial.data, status= status.HTTP_201_CREATED)
+
+        stdlogg2.debug(msg='POST request failed to store')
+        return Response(serial.errors, status= status.HTTP_400_BAD_REQUEST)
