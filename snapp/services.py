@@ -1,16 +1,24 @@
 import requests
 import json
 import logging
-
+from snapp.models import configServiceNow
 
 ########################################################################################################################
 # Connection details
 loghttp = logging.getLogger(name='mylogfordebug')
+
 class ConnDet:
     url = 'https://dev20632.service-now.com/api/now/table/incident'
     user = 'admin'
     pwd = 'Qazwsx@123'
 
+
+def configServiceNowInstance():
+    conObj = configServiceNow.objects.get(enable = True)
+    ConnDet.url = 'https://' + conObj.host + '.service-now.com/api/now/table/incident'
+    ConnDet.user = conObj.username
+    ConnDet.pwd = conObj.password
+    loghttp.debug('Service Now instance configured successfully with host ' + conObj.host)
 
 def getConnectDetail(sys_id):
     url = ConnDet.url + '/' + sys_id
@@ -68,15 +76,13 @@ def getConnectSnList():
         loghttp.debug('Connection is okk.... \n getConnectSnList()' + str(response.status_code))
         #print('Status:', response.status_code)
 
-    # print(str(response.json()))
+    #print(response.json())
     resData = json.dumps(response.json())
     resDataJson = json.loads(resData)  # result in string error solved
 
     parseRes = resDataJson['result']
     loghttp.debug('JSON is returned backed from getConnectSnList()' + str(response.status_code))
-    # print('**************')
-    # print(parseRes)
-    # print(resDataJson)
+
     return parseRes
 
 
@@ -108,13 +114,11 @@ def finalupdate(idofinci, desc, name):
     postBody = "{'short_description':'" + desc + "','number':'" + name + "'}"
 
     response = requests.put(url, auth=(user, pwd), headers=headers, data=postBody)
+
     if response.status_code != 200:
         loghttp.debug('Failed to update in finalupdate(idofinci, desc, name)' + str(response.status_code))
         raise requests.ConnectionError
 
-    #print(url)
-    #print('@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@')
-    #print(response.status_code)
     loghttp.debug('Upadted successfully... finalupdate(idofinci, desc, name)' + str(response.status_code))
 
 
@@ -131,8 +135,3 @@ def finaldelete(idofinci):
     if response.status_code != 204:
         loghttp.debug('Failed to delete in finaldelete(idofinci)' + str(response.status_code))
         raise requests.ConnectionError
-
-    #print(url)
-    #print('@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@')
-    #print(response.status_code)
-    loghttp.debug('Deleted successfully... finalupdate(idofinci)' + str(response.status_code))

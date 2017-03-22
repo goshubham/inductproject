@@ -15,10 +15,11 @@ stdlogg2.debug(msg='------------------------------------------------------------
 @login_required(login_url="login/")
 def logi(request):
     try:
+        configServiceNowInstance()
         stdlogg.info('Viewing Dashboard')
         return render(request, "home.html")
     except Exception as e:
-        stdlogg.info('Login Unsuccessful')
+        stdlogg.info('Unsuccessful attempt (check logs)')
         stdlogg2.debug(e.__str__())
         return render(request , "error.html")
 
