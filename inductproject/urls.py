@@ -15,14 +15,19 @@ Including another URLconf
 """
 from django.conf.urls import include, url
 from django.contrib import admin
-from django.contrib.auth import views
+from django.contrib.auth import views as ad_views
 from snapp.forms import LoginForm
+from rest_framework.urlpatterns import format_suffix_patterns
+from snapp import views
 
 urlpatterns = [
     url(r'^admin/', admin.site.urls),
     url(r'', include('snapp.urls')),
-    url(r'^home/login/$', views.login, {'template_name':'login.html', 'authentication_form': LoginForm},name= 'login'),
-    url(r'^list/login/$', views.login, {'template_name':'login.html', 'authentication_form': LoginForm},name= 'login'),
-    url(r'^login/$', views.login, {'template_name':'login.html', 'authentication_form': LoginForm},name= 'login'),
-    url(r'^logout/$', views.logout, {'next_page': '/login'}, name= 'logout'),
+    url(r'^home/login/$', ad_views.login, {'template_name':'login.html', 'authentication_form': LoginForm},name= 'login'),
+    url(r'^list/login/$', ad_views.login, {'template_name':'login.html', 'authentication_form': LoginForm},name= 'login'),
+    url(r'^login/$', ad_views.login, {'template_name':'login.html', 'authentication_form': LoginForm},name= 'login'),
+    url(r'^logout/$', ad_views.logout, {'next_page': '/login'}, name= 'logout'),
+    url(r'^instancelist/$', views.SNInstanceConfiguredList.as_view())
 ]
+
+urlpatterns = format_suffix_patterns(urlpatterns)

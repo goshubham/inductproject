@@ -1,10 +1,15 @@
-from django.shortcuts import render
+from django.shortcuts import render, get_object_or_404
 from django.contrib.auth.decorators import login_required
 import json
 import requests
 from .services import ConnDet
 import logging
 from .services import *
+from .models import configServiceNow
+from rest_framework.views import APIView
+from rest_framework.response import Response
+from rest_framework import status
+from .serializers import ConfigSNSerializer
 
 # Standard Logger for project
 stdlogg = logging.getLogger(name= 'mylog')
@@ -150,3 +155,17 @@ def delete_select(request):
         return render(request, "error.html", {'error': 'ConnectionError'})
 
 # Commit is made before implementing REST framework
+#to list all configured instances of Service Now
+
+
+class SNInstanceConfiguredList(APIView):
+
+    def get(self , request):
+        confObjects = configServiceNow.objects.all()
+        serial = ConfigSNSerializer(confObjects, many = True)
+        stdlogg.info(msg= 'GET request is made to get list of configured SN instances')
+        stdlogg2.debug(msg= 'GET request for listing configured SN instances')
+        return Response(serial.data)
+
+    def post(self):
+        pass
