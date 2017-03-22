@@ -149,3 +149,4 @@ def delete_select(request):
         stdlogg.info('failed to delete selected incident')
         return render(request, "error.html", {'error': 'ConnectionError'})
 
+# Commit is made before implementing REST framework
