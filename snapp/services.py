@@ -2,6 +2,7 @@ import requests
 import json
 import logging
 from snapp.models import configServiceNow
+import requests.exceptions as exc
 
 ########################################################################################################################
 # Connection details
@@ -32,7 +33,7 @@ def getConnectDetail(sys_id):
     response = requests.get(url, auth=(user, pwd), headers=headers)
     if response.status_code != 200:
         loghttp.debug('Response other than 200 in getConnectDetail(sysid) '+ str(response.status_code))
-        raise requests.ConnectionError
+        raise requests.ConnectionError(str(response.status_code))
 
     # Check for HTTP codes other than 200
     if response.status_code != 200:
@@ -44,6 +45,7 @@ def getConnectDetail(sys_id):
         loghttp.debug('Connection is okk...\n getConnectDetail(sysid)' + str(response.status_code))
 
     resData = json.dumps(response.json())
+    #loghttp.debug(response.json())
     resDataJson = json.loads(resData)
 
     parseRes = resDataJson['result']
@@ -65,7 +67,7 @@ def getConnectSnList():
     response = requests.get(url, auth=(user, pwd), headers=headers)
     if response.status_code != 200:
         loghttp.debug('Response other than 200 in getConnectSnList()' + str(response.status_code))
-        raise requests.ConnectionError
+        raise exc.InvalidURL(str(response.status_code))
 
     if response.status_code != 200:
         #print('Status:', response.status_code, 'Headers:', response.headers, 'Error Response:', response.json())
@@ -99,7 +101,7 @@ def createincident(name, desc, urgency, catag, state):
     response = requests.post(url, auth=(user, pwd), headers=headers, data=postBody)
     if response.status_code != 201:
         loghttp.debug('failed to create incident check createincident(name, desc)' + str(response.status_code))
-        raise requests.ConnectionError
+        raise requests.ConnectionError(str(response.status_code))
 
     loghttp.debug('Incident is creating createincident(name, desc)' + str(response.status_code))
 
@@ -117,7 +119,7 @@ def finalupdate(idofinci, desc, name,urgency,catag,state):
 
     if response.status_code != 200:
         loghttp.debug('Failed to update in finalupdate(idofinci, desc, name)' + str(response.status_code))
-        raise requests.ConnectionError
+        raise requests.ConnectionError(str(response.status_code))
 
     loghttp.debug('Upadted successfully... finalupdate(idofinci, desc, name)' + str(response.status_code))
 
@@ -134,4 +136,4 @@ def finaldelete(idofinci):
     response = requests.delete(url, auth=(user, pwd), headers=headers)
     if response.status_code != 204:
         loghttp.debug('Failed to delete in finaldelete(idofinci)' + str(response.status_code))
-        raise requests.ConnectionError
+        raise requests.ConnectionError(str(response.status_code))

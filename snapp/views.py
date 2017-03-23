@@ -29,7 +29,6 @@ def logi(request):
         return render(request , "error.html")
 
 
-########################################################################################################################
 @login_required(login_url="login/")
 def listall(request):
     try:
@@ -40,13 +39,12 @@ def listall(request):
 
         #stdlogg.warning(msg= 'isuue with listing')
         return render(request, "list.html", {'instancelist': dictOfList})
-    except requests.ConnectionError as e:
-        stdlogg2.debug(e.__str__())
+    except Exception as e:
+        stdlogg2.debug(str(e))
         #stdlogg.warning(msg= 'isuue with listing')
-        return render(request, "error.html", {'error': 'ConnectionError'})
+        return render(request, "error.html", {'error': str(e)})
 
 
-#######################################################################################################################
 
 
 @login_required(login_url="login/")
@@ -62,11 +60,13 @@ def incidentdet(request, sys_id):
         return render(request, 'error.html', {'error': 'ConnectionError'})
 
 
-######################################################################################################################
+
 @login_required(login_url="login/")
 def createinc(request):
     stdlogg.info(msg='Need some info to create your incident')
     return render(request, 'createinc.html')
+
+
 
 
 @login_required(login_url="login/")
@@ -90,7 +90,9 @@ def createdinc(request):
         stdlogg.info(msg='creation failed...')
         return render(request, "error.html", {'error': 'ConnectionError'})
 
-######################################################################################################################
+
+
+
 @login_required(login_url="login/")
 def updateinc(request):
     try:
@@ -101,6 +103,8 @@ def updateinc(request):
         stdlogg2.debug('updation failed...'+ e.__str__())
         stdlogg.info('worng while selecting incident to update')
         return render(request, "error.html", {'error': 'ConnectionError'})
+
+
 
 
 @login_required(login_url="login/")
@@ -124,6 +128,8 @@ def getUpdateDetail(request):
         stdlogg.info('worng while upadting')
         return render(request, "error.html", {'error': 'ConnectionError'})
 
+
+
 @login_required(login_url="login/")
 def update_select(request, number):
     sys_id = request.POST['but']
@@ -131,7 +137,8 @@ def update_select(request, number):
     return render(request, 'updateform.html', {'sys_id': sys_id, 'name': number})
 
 
-#######################################################################################################################
+
+
 @login_required(login_url="login/")
 def deleteinc(request):
     try:
@@ -143,6 +150,8 @@ def deleteinc(request):
         stdlogg2.debug('failed to delete'+ e.__str__())
         stdlogg.info(msg='problem while deletion')
         return render(request, "error.html", {'error': 'ConnectionError'})
+
+
 
 
 @login_required(login_url="login/")
@@ -160,8 +169,12 @@ def delete_select(request):
         stdlogg.info('failed to delete selected incident')
         return render(request, "error.html", {'error': 'ConnectionError'})
 
+
+
+
 # Commit is made before implementing REST framework
 #to list all configured instances of Service Now
+
 
 
 class SNInstanceConfiguredList(APIView):
