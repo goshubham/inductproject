@@ -18,11 +18,49 @@
                                     <span class="icon-bar"></span>
                                     <span class="icon-bar"></span>
                                 </button>
-                                <a class="navbar-brand" href="/home">Service Now</a>
-                                <a class="navbar-brand" href="/list">List</a>
-                                <a class="navbar-brand" href="/admin/snapp">Configure Service Now</a>
+                                <a class="navbar-brand" href="/home">ServiceNow</a>
+                                <!--<a class="navbar-brand" href="/list">List</a>
+                                <a class="navbar-brand" href="/admin/snapp">Configure Service Now</a>-->
                             </div>
-                            <div class="collapse navbar-collapse" id="bs-example-navbar-collapse-1">
+                            <div class="collapse navbar-collapse" id="topNavBar">
+
+                                <ul class="nav navbar-nav">
+                                    <li {% block list_active %}{% endblock %}>
+                                        <a href="/list">
+                                         List
+                                        </a>
+                                    </li>
+                                    <li>
+                                        <a href="/admin/snapp">
+                                         Configure ServiceNow
+                                        </a>
+                                    </li>
+                                </ul>
+                                <ul class="nav navbar-nav navbar-right">
+                                    <li class="dropdown">
+                                        <a href="#" class="dropdown-toggle" data-toggle="dropdown" role="button" aria-expanded="false">Options
+                                            <span class="caret"></span>
+                                        </a>
+                                        <ul class="dropdown-menu" role="menu">
+
+                                            <li class="{% block create_active %}{% endblock %}">
+                                                <a href="/create">Create</a>
+                                            </li>
+                                            <li class="{% block update_active %}{% endblock %}">
+                                                <a href="/update">Update</a>
+                                            </li>
+                                            <li class="{% block delete_active %}{% endblock %}">
+                                                <a href="/delete">Delete</a>
+                                            </li>
+                                            <li class="divider"></li>
+                                            <li>
+                                                <a href="/logout">Logout</a>
+                                            </li>
+                                        </ul>
+                                    </li>
+                                </ul>
+                            </div>
+                            <!--<div class="collapse navbar-collapse" id="bs-example-navbar-collapse-1">
                                 <ul class="nav navbar-nav navbar-right">
                                     <li class="dropdown">
                                         <a href="#" class="dropdown-toggle" data-toggle="dropdown" role="button" aria-expanded="false">Options
@@ -46,7 +84,7 @@
                                         </ul>
                                     </li>
                                 </ul>
-                            </div>
+                            </div>-->
                         </div>
                     </nav>
 

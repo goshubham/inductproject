@@ -1,13 +1,38 @@
 {% extends 'base.html' %}
-
+{% block list_active %}{% endblock %}
 {% block content %}
 
 <div class="container">
     <div class="row">
         <div class="jumbotron">
-            <h1 align="center">Welcome to Service Now</h1>
-            <p align="center">Dashboard</p>
-
+            <h1 align="center">Welcome to ServiceNow</h1>
+            <!--<p align="center">Dashboard</p>-->
+            <h3 align="center"><strong>Incident Management</strong></h3><br><br>
+            <table align="center">
+                <tbody>
+                    <tr>
+                        <td><a href="/list"> <img src="/static/images/button_list-incidents.png"></a></td>
+                        <td>&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;</td>
+                        <td><a href="/create"><img src="/static/images/button_create-incidents.png"></a></td>
+                    </tr>
+                    <tr>
+                        <td><br><br></td>
+                    </tr>
+                    <tr>
+                        <td>&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;</td>
+                        <td><a href="/instancelist"> <img src="/static/images/button_fetch-api.png"></a></td>
+                        <td>&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;</td>
+                    </tr>
+                    <tr>
+                        <td><br><br></td>
+                    </tr>
+                    <tr>
+                        <td><a href="/update"> <img src="/static/images/button_update-incidents.png"></a></td>
+                        <td>&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;</td>
+                        <td><a href="/delete"> <img src="/static/images/button_delete-incidents.png"></a></td>
+                    </tr>
+                </tbody>
+            </table>
             
         </div>
     </div>
