@@ -1,0 +1,31 @@
+[2017-03-27 17:24:53] DEBUG [mylogfordebug.<module>:17] -------------------------------------------------------------------------------
+[2017-03-27 17:25:08] INFO GET request is made to get list of configured SN instances
+[2017-03-27 17:25:08] DEBUG [mylogfordebug.get:187] GET request for listing configured SN instances
+[2017-03-27 17:29:43] DEBUG [mylogfordebug.configServiceNowInstance:22] Service Now instance configured successfully with host wegterg
+[2017-03-27 17:29:43] INFO Viewing Dashboard
+[2017-03-27 17:29:50] INFO GET request is made to get list of configured SN instances
+[2017-03-27 17:29:50] DEBUG [mylogfordebug.get:187] GET request for listing configured SN instances
+[2017-03-27 17:29:58] INFO GET request is made to get list of configured SN instances
+[2017-03-27 17:29:58] DEBUG [mylogfordebug.get:187] GET request for listing configured SN instances
+[2017-03-27 17:52:26] DEBUG [mylogfordebug.<module>:18] -------------------------------------------------------------------------------
+[2017-03-27 17:52:54] INFO GET request is made to get list of configured SN instances
+[2017-03-27 17:52:54] DEBUG [mylogfordebug.get:190] GET request for listing configured SN instances
+[2017-03-27 17:53:00] INFO GET request is made to get list of configured SN instances
+[2017-03-27 17:53:00] DEBUG [mylogfordebug.get:190] GET request for listing configured SN instances
+[2017-03-27 17:53:49] INFO GET request is made to get list of configured SN instances
+[2017-03-27 17:53:49] DEBUG [mylogfordebug.get:190] GET request for listing configured SN instances
+[2017-03-27 17:54:48] DEBUG [mylogfordebug.<module>:18] -------------------------------------------------------------------------------
+[2017-03-27 17:58:02] DEBUG [mylogfordebug.<module>:18] -------------------------------------------------------------------------------
+[2017-03-27 17:58:07] INFO GET request is made to get list of configured SN instances
+[2017-03-27 17:58:07] DEBUG [mylogfordebug.get:191] GET request for listing configured SN instances
+[2017-03-27 17:58:36] DEBUG [mylogfordebug.<module>:18] -------------------------------------------------------------------------------
+[2017-03-27 17:58:59] DEBUG [mylogfordebug.<module>:18] -------------------------------------------------------------------------------
+[2017-03-27 17:59:06] INFO GET request is made to get list of configured SN instances
+[2017-03-27 17:59:06] DEBUG [mylogfordebug.get:191] GET request for listing configured SN instances
+[2017-03-27 17:59:39] DEBUG [mylogfordebug.<module>:18] -------------------------------------------------------------------------------
+[2017-03-27 17:59:42] INFO GET request is made to get list of configured SN instances
+[2017-03-27 17:59:42] DEBUG [mylogfordebug.get:190] GET request for listing configured SN instances
+[2017-03-27 18:00:08] DEBUG [mylogfordebug.<module>:18] -------------------------------------------------------------------------------
+[2017-03-28 12:28:27] DEBUG [mylogfordebug.<module>:18] -------------------------------------------------------------------------------
+[2017-03-28 12:28:51] DEBUG [mylogfordebug.configServiceNowInstance:22] Service Now instance configured successfully with host wegterg
+[2017-03-28 12:28:51] INFO Viewing Dashboard

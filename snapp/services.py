@@ -65,6 +65,7 @@ def getConnectSnList():
     headers = {"Accept": "application/json"}
     # Do the HTTP request
     response = requests.get(url, auth=(user, pwd), headers=headers)
+
     if response.status_code != 200:
         loghttp.debug('Response other than 200 in getConnectSnList()' + str(response.status_code))
         raise exc.InvalidURL(str(response.status_code))
@@ -79,8 +80,13 @@ def getConnectSnList():
         #print('Status:', response.status_code)
 
     #print(response.json())
-    resData = json.dumps(response.json())
-    resDataJson = json.loads(resData)  # result in string error solved
+    try:
+        resData = json.dumps(response.json())
+        resDataJson = json.loads(resData)  # result in string error solved
+
+    except Exception as e:
+        loghttp.debug("Error while parsing JSON having html response")
+        loghttp.debug(e.__str__())
 
     parseRes = resDataJson['result']
     loghttp.debug('JSON is returned backed from getConnectSnList()' + str(response.status_code))

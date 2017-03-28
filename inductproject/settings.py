@@ -40,7 +40,11 @@ INSTALLED_APPS = [
     'snapp.apps.SnappConfig',
     'rest_framework',
 ]
-
+REST_FRAMEWORK = {
+    'DEFAULT_AUTHENTICATION_CLASSES': (
+        'rest_framework.authentication.BasicAuthentication',
+    )
+}
 MIDDLEWARE = [
     'django.middleware.security.SecurityMiddleware',
     'django.contrib.sessions.middleware.SessionMiddleware',
@@ -142,7 +146,8 @@ LOGGING = {
     'handlers': {
         'console': {
             'level': 'INFO',
-            'class': 'logging.StreamHandler',
+            'class': 'logging.FileHandler',
+            'filename': 'C:/Users/GS-1436/PycharmProjects/inductproject/debug.log',
             'formatter': 'simple'
         },
         'development_logfile': {

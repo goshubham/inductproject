@@ -9,7 +9,7 @@
             <form method="post" action="{% url 'getUpdateDetail' %}" id="upform">
                 {% csrf_token %}
                 <p align="left">
-                Name:<br>
+                Number:<br>
                 <input type="text" name="nameinci" placeholder="Name Incident" align="left" id="namei" size="40" value={{ name }}><br />
                     ID:<br>
                 <input type="text" name="idinci" placeholder="ID Incident" align="left" id="idi" size="40" readonly value={{ sys_id }}><br />

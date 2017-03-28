@@ -9,6 +9,7 @@ from .models import configServiceNow
 from rest_framework.views import APIView
 from rest_framework.response import Response
 from rest_framework import status
+from rest_framework import permissions
 from .serializers import ConfigSNSerializer
 
 # Standard Logger for project
@@ -39,10 +40,11 @@ def listall(request):
 
         #stdlogg.warning(msg= 'isuue with listing')
         return render(request, "list.html", {'instancelist': dictOfList})
+
     except Exception as e:
         stdlogg2.debug(str(e))
         #stdlogg.warning(msg= 'isuue with listing')
-        return render(request, "error.html", {'error': str(e)})
+        return render(request, "error.html", {'error': type(e).__name__ })
 
 
 
@@ -178,6 +180,8 @@ def delete_select(request):
 
 
 class SNInstanceConfiguredList(APIView):
+
+    permission_classes = ( permissions.IsAuthenticated , )
 
     def get(self , request):
         confObjects = configServiceNow.objects.all()

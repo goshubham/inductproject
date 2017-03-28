@@ -9,7 +9,7 @@
             <form method="post" action="{% url 'createdinc' %}" id="createform">
                 {% csrf_token %}
                 <p align="left">
-                Name:<br>
+                Number:<br>
                 <input type="text" name="nameinci" placeholder="Name Incident" align="left" id="namei" required><br />
                 Short Description:<br />
                 <textarea cols="30" rows="3" name="descriptioninci" placeholder="Describe Incident" id="desci" required form="createform"></textarea><br><br>
